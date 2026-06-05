@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatGPT do Zero ao Profissional — App Interativo MENTE.IA</title>
+<meta name="description" content="Aprenda a usar o ChatGPT como profissional de elite. App interativo com 10 capítulos navegáveis, 50 prompts copiáveis e plano de 30 dias. Acesso imediato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --roxo:#7F77DD;--roxo-esc:#3C3489;--roxo-bg:#EEEDFE;
+  --verde:#1D9E75;--verde-bg:#E1F5EE;
+  --preto:#0F0F12;--cinza:#888780;--offwhite:#F5F5F3;
+  --amber:#EF9F27;--amber-bg:#FAEEDA;
+  --coral:#D85A30;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#0F0F12;color:#F5F5F3;overflow-x:hidden;line-height:1.6}
+
+.topbar{background:#1A1920;border-bottom:1px solid rgba(127,119,221,0.2);padding:10px 0;text-align:center}
+.topbar p{font-size:13px;color:#CCC}
+.topbar strong{color:var(--amber)}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;position:sticky;top:0;z-index:100;background:rgba(15,15,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px;color:#fff}
+.logo span{color:var(--roxo)}
+.nav-cta{background:var(--roxo);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s}
+.nav-cta:hover{background:var(--roxo-esc)}
+
+.hero{padding:80px 5% 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(127,119,221,0.12) 0%,transparent 70%);pointer-events:none}
+.eyebrow{display:inline-block;background:rgba(127,119,221,0.15);border:1px solid rgba(127,119,221,0.35);color:var(--roxo);font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:28px}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(34px,5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-2px;color:#fff;max-width:860px;margin:0 auto 24px}
+.hero h1 em{font-style:normal;color:var(--roxo)}
+.hero-sub{font-size:clamp(16px,1.8vw,20px);color:#AAA;max-width:620px;margin:0 auto 40px;line-height:1.65}
+.hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--roxo);color:#fff;border:none;padding:18px 40px;border-radius:12px;font-family:'Syne',sans-serif;font-size:18px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:-.3px}
+.btn-primary:hover{background:#6B63CE;transform:translateY(-2px)}
+.hero-safe{font-size:13px;color:var(--cinza);display:flex;align-items:center;gap:6px}
+
+/* App mockup */
+.app-mockup-wrap{margin:56px auto 0;max-width:680px}
+.app-mockup{background:#1A1920;border:1px solid rgba(127,119,221,0.3);border-radius:16px;overflow:hidden}
+.app-mockup-bar{background:#13121A;border-bottom:1px solid rgba(255,255,255,0.07);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.app-mockup-logo{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff}
+.app-mockup-logo span{color:var(--roxo)}
+.app-mockup-prog{display:flex;align-items:center;gap:8px}
+.prog-track{width:80px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.prog-fill{width:30%;height:100%;background:var(--roxo);border-radius:2px}
+.prog-txt{font-size:11px;color:rgba(255,255,255,0.4)}
+.app-mockup-body{display:grid;grid-template-columns:160px 1fr}
+.app-sidebar{border-right:1px solid rgba(255,255,255,0.06);padding:10px 0}
+.app-nav-item{padding:7px 14px;font-size:12px;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:7px;border-left:2px solid transparent}
+.app-nav-item.active{color:#fff;background:rgba(127,119,221,0.08);border-left-color:var(--roxo)}
+.app-nav-num{font-size:10px;color:rgba(255,255,255,0.25);min-width:16px}
+.app-content{padding:20px 22px}
+.app-eyebrow{font-size:10px;font-weight:500;color:var(--roxo);letter-spacing:.8px;margin-bottom:6px}
+.app-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.3}
+.app-text{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:12px}
+.prompt-preview{background:rgba(127,119,221,0.08);border:1px solid rgba(127,119,221,0.2);border-left:3px solid var(--roxo);border-radius:0 8px 8px 0;padding:10px 12px;margin-bottom:8px}
+.prompt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.prompt-badge{font-size:10px;font-weight:600;color:var(--roxo);background:#EEEDFE;padding:2px 7px;border-radius:20px}
+.copy-chip{font-size:10px;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:2px 7px}
+.prompt-txt{font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:monospace}
+.app-footer-btns{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06)}
+.mark-chip{font-size:11px;color:#1D9E75;background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.2);border-radius:6px;padding:5px 10px}
+.nav-chips{display:flex;gap:6px}
+.nav-chip{font-size:11px;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:5px 10px}
+
+/* Feature chips */
+.features-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:36px 0 0}
+.feat-chip{display:flex;align-items:center;gap:7px;background:#1A1920;border:1px solid rgba(255,255,255,0.07);border-radius:40px;padding:8px 16px;font-size:13px;color:#CCC}
+.feat-icon{width:18px;height:18px;color:var(--roxo)}
+
+.proof-bar{background:#13121A;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:20px 5%;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:10px;font-size:14px;color:#AAA}
+.proof-item strong{color:#fff}
+
+section{padding:72px 5%}
+.section-eyebrow{font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--roxo);margin-bottom:14px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
+.section-sub{font-size:17px;color:#AAA;line-height:1.65}
+
+/* O que é o app */
+.app-features{background:#13121A}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:40px}
+.feat-card{background:#1A1920;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px}
+.feat-card-icon{width:40px;height:40px;background:rgba(127,119,221,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px}
+.feat-card h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.feat-card p{font-size:14px;color:#888;line-height:1.6}
+
+/* Conteúdo */
+.conteudo{background:#0F0F12}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px;margin-top:36px}
+.cap-item{background:#1A1920;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.cap-num{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--roxo);background:rgba(127,119,221,0.12);border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px}
+.cap-info strong{display:block;font-size:14px;color:#fff;margin-bottom:3px;font-weight:500}
+.cap-info p{font-size:12px;color:#888;line-height:1.5}
+
+/* Antes/depois */
+.transformacao-wrap{background:#13121A}
+.transformacao{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;max-width:800px;margin:44px auto 0}
+.trans-box{background:#1A1920;border-radius:16px;padding:24px;text-align:left}
+.trans-box.antes{border:1px solid rgba(216,90,48,0.25)}
+.trans-box.depois{border:1px solid rgba(29,158,117,0.35)}
+.trans-label{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.trans-box.antes .trans-label{color:var(--coral)}
+.trans-box.depois .trans-label{color:var(--verde)}
+.trans-item{font-size:14px;color:#CCC;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:8px;line-height:1.4}
+.trans-item:last-child{border:none}
+.trans-arrow{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--roxo)}
+
+/* Para quem */
+.para{background:#0F0F12}
+.para-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:36px}
+.para-card{background:#1A1920;border:1px solid rgba(29,158,117,0.18);border-radius:14px;padding:18px}
+.para-emoji{font-size:26px;margin-bottom:10px}
+.para-card strong{display:block;font-size:14px;color:#fff;margin-bottom:5px;font-family:'Syne',sans-serif;font-weight:600}
+.para-card p{font-size:12px;color:#888;line-height:1.5}
+
+/* Depoimentos */
+.depoimentos{background:#13121A}
+.dep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:36px}
+.dep-card{background:#1A1920;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px}
+.dep-stars{color:var(--amber);font-size:15px;margin-bottom:12px;letter-spacing:2px}
+.dep-text{font-size:14px;color:#CCC;line-height:1.65;margin-bottom:16px;font-style:italic}
+.dep-author{display:flex;align-items:center;gap:10px}
+.dep-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff}
+.dep-author-info strong{display:block;font-size:13px;color:#fff}
+.dep-author-info span{font-size:11px;color:#888}
+
+/* Oferta */
+.oferta{background:#13121A;text-align:center}
+.oferta-box{background:#1A1920;border:1px solid rgba(127,119,221,0.3);border-radius:24px;max-width:560px;margin:44px auto 0;padding:36px;position:relative}
+.oferta-box::before{content:'OFERTA DE LANÇAMENTO';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--roxo);color:#fff;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:5px 16px;border-radius:20px;white-space:nowrap}
+.incluso-list{text-align:left;margin:20px 0}
+.incluso-item{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:14px;color:#CCC}
+.incluso-item:last-child{border:none}
+.incluso-item svg{width:17px;height:17px;color:var(--verde);flex-shrink:0;margin-top:2px}
+.incluso-item s{color:#555;font-size:12px;margin-left:auto;white-space:nowrap}
+.incluso-item .main-tag{font-size:10px;background:rgba(127,119,221,0.15);color:#AFA9EC;border-radius:4px;padding:1px 6px;margin-left:6px;flex-shrink:0}
+.price-wrap{margin:24px 0 20px}
+.price-old{font-size:15px;color:#555;text-decoration:line-through;margin-bottom:4px}
+.price-main{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px}
+.price-main span{font-size:20px;vertical-align:super;font-weight:500;margin-right:4px;letter-spacing:0}
+.price-parcel{font-size:13px;color:#888;margin-top:4px}
+.btn-oferta{display:block;width:100%;background:var(--verde);color:#fff;border:none;padding:18px;border-radius:12px;font-family:'Syne',sans-serif;font-size:19px;font-weight:800;cursor:pointer;transition:all .2s;margin-bottom:12px;letter-spacing:-.3px;text-align:center;text-decoration:none}
+.btn-oferta:hover{background:#169064;transform:translateY(-1px)}
+.garantia-note{font-size:12px;color:#888;display:flex;align-items:center;justify-content:center;gap:5px}
+
+/* Garantia */
+.garantia{background:#0F0F12;text-align:center}
+.garantia-card{background:#1A1920;border:2px solid rgba(29,158,117,0.3);border-radius:20px;max-width:540px;margin:36px auto 0;padding:32px;display:flex;gap:22px;align-items:flex-start;text-align:left}
+.garantia-badge{width:64px;height:64px;background:rgba(29,158,117,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.garantia-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.garantia-text{font-size:14px;color:#AAA;line-height:1.65}
+
+/* FAQ */
+.faq{background:#13121A;padding:72px 5%}
+.faq details{background:#1A1920;border:1px solid rgba(255,255,255,0.07);border-radius:12px;margin-bottom:8px}
+.faq summary{padding:18px 22px;font-size:15px;color:#fff;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:20px;color:var(--roxo);transition:transform .2s;font-weight:300}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq-body{padding:0 22px 18px;font-size:14px;color:#AAA;line-height:1.7;border-top:1px solid rgba(255,255,255,0.06)}
+
+/* CTA final */
+.cta-final{background:#0F0F12;text-align:center;padding:80px 5%}
+.cta-final h2{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,46px);font-weight:800;color:#fff;letter-spacing:-1.5px;margin-bottom:14px;line-height:1.15}
+.cta-final p{font-size:17px;color:#AAA;max-width:460px;margin:0 auto 36px;line-height:1.65}
+
+footer{background:#0A0A0C;border-top:1px solid rgba(255,255,255,0.06);padding:26px 5%;text-align:center}
+footer p{font-size:12px;color:#555}
+
+@media(max-width:620px){
+  .transformacao{grid-template-columns:1fr;}.trans-arrow{display:none}
+  .garantia-card{flex-direction:column}.proof-bar{gap:20px}
+  .app-mockup-body{grid-template-columns:1fr}.app-sidebar{display:none}
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   AJUSTES VISUAIS V2 — TIPOGRAFIA, ESPAÇAMENTO E MOBILE
+   Corrige sensação de fontes espalhadas e desalinhadas.
+═══════════════════════════════════════════════════════ */
+:root{
+  --bg:#0f0f12;
+  --panel:#1a1920;
+  --panel-2:#13121a;
+  --line:rgba(255,255,255,.08);
+  --text:#f7f7f6;
+  --muted:#b7b4c0;
+  --muted-2:#8f8c99;
+}
+
+html{font-size:16px;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+body{
+  font-family:'DM Sans',Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:1.65;
+  letter-spacing:0;
+  color:var(--text);
+  background:var(--bg);
+}
+
+body,button,a,input,summary{font-family:'DM Sans',Arial,sans-serif}
+h1,h2,h3,.section-title,.logo,.app-mockup-logo,.btn-primary,.btn-oferta,.price-main,.trans-arrow{
+  font-family:'Syne','DM Sans',Arial,sans-serif;
+}
+
+p,li,span,div,summary,.section-sub,.hero-sub,.feat-card p,.cap-info p,.para-card p,.dep-text,.faq-body,.garantia-text{
+  max-width:100%;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:auto;
+}
+
+section{padding:clamp(56px,7vw,88px) 5%}
+.hero{padding:clamp(64px,8vw,96px) 5% clamp(52px,7vw,72px)}
+
+.hero h1{
+  max-width:980px;
+  font-size:clamp(2.35rem,5.2vw,4.35rem);
+  line-height:1.04;
+  letter-spacing:-.055em;
+  text-wrap:balance;
+  margin-bottom:24px;
+}
+.hero-sub{
+  max-width:760px;
+  font-size:clamp(1.02rem,1.7vw,1.22rem);
+  line-height:1.72;
+  color:var(--muted);
+  text-wrap:pretty;
+}
+.section-title{
+  max-width:940px;
+  font-size:clamp(1.85rem,3.6vw,2.9rem);
+  line-height:1.13;
+  letter-spacing:-.04em;
+  text-wrap:balance;
+}
+.section-eyebrow,.eyebrow{
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:#a9a2ff;
+}
+.section-sub{max-width:720px;color:var(--muted);font-size:1.06rem;line-height:1.72}
+
+nav{padding:16px 5%;gap:18px}
+.logo{font-size:1.35rem;white-space:nowrap}
+.nav-cta{white-space:nowrap;font-weight:700;border-radius:999px;padding:11px 20px}
+.btn-primary,.btn-oferta{
+  min-height:56px;
+  justify-content:center;
+  line-height:1.15;
+  text-align:center;
+  box-shadow:0 14px 34px rgba(127,119,221,.18);
+}
+.btn-primary{font-size:clamp(1rem,1.6vw,1.12rem);padding:18px 28px;border-radius:14px}
+.btn-oferta{font-size:clamp(1.02rem,1.8vw,1.18rem)}
+
+.app-mockup-wrap{max-width:900px;width:100%}
+.app-mockup{border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.35)}
+.app-mockup-bar{gap:16px;flex-wrap:wrap}
+.app-mockup-body{grid-template-columns:minmax(175px,210px) 1fr}
+.app-nav-item{font-size:.78rem;line-height:1.25;gap:8px;padding:9px 16px}
+.app-content{padding:26px 30px}
+.app-title{font-family:'Syne','DM Sans',Arial,sans-serif;font-size:1.25rem;letter-spacing:-.02em;line-height:1.22}
+.app-text{font-size:.94rem;color:var(--muted);line-height:1.68}
+.prompt-txt{font-family:'DM Sans',Arial,sans-serif;font-size:.88rem;line-height:1.6;color:#d6d2e2}
+.prompt-preview{border-radius:12px;padding:14px 16px}
+
+.features-strip,.proof-bar{max-width:1120px;margin-left:auto;margin-right:auto}
+.feat-chip,.proof-item{font-size:.92rem;line-height:1.35}
+.feat-grid,.cap-grid,.para-grid,.dep-grid{align-items:stretch}
+.feat-card,.cap-item,.para-card,.dep-card,.trans-box,.oferta-box,.garantia-card,details{
+  box-shadow:0 12px 34px rgba(0,0,0,.14);
+}
+.feat-card h3{font-size:1.05rem;line-height:1.25;letter-spacing:-.01em}
+.feat-card p{font-size:.95rem;color:var(--muted-2)}
+.cap-info strong{font-size:.96rem;line-height:1.28}
+.cap-info p{font-size:.86rem;color:var(--muted-2);line-height:1.55}
+.para-card strong{font-size:.98rem;line-height:1.28}
+.para-card p{font-size:.88rem;color:var(--muted-2)}
+.dep-text{font-size:.96rem;color:#d4d0dc}
+
+.transformacao-wrap>.section-title,.transformacao-wrap .section-title{text-align:center;margin-left:auto;margin-right:auto}
+.transformacao{max-width:960px;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);gap:18px}
+.trans-item{align-items:flex-start;font-size:.94rem;line-height:1.5}
+.trans-item svg{flex:0 0 auto;margin-top:3px}
+
+.oferta-box{max-width:640px;padding:clamp(30px,5vw,48px)}
+.incluso-item{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;align-items:start;font-size:.95rem;line-height:1.45}
+.incluso-item svg{grid-column:1}
+.incluso-item s{grid-column:3;margin-left:8px}
+.incluso-item .main-tag{display:inline-block;margin:4px 0 0 0;width:max-content}
+.price-main{font-size:clamp(3.2rem,8vw,4.3rem)}
+.price-old,.price-parcel{color:var(--muted-2)}
+.garantia-note{line-height:1.45;flex-wrap:wrap}
+
+.faq summary{line-height:1.35;gap:14px}
+.faq summary::after{flex-shrink:0}
+footer p{line-height:1.55}
+
+@media(max-width:760px){
+  body{font-size:15.5px;line-height:1.62}
+  .topbar{padding:9px 14px}.topbar p{font-size:.78rem;line-height:1.35}
+  nav{padding:13px 5%}.logo{font-size:1.15rem}.nav-cta{font-size:.82rem;padding:9px 13px}
+  .hero h1{font-size:clamp(2.05rem,10vw,3.15rem);letter-spacing:-.045em;line-height:1.08}
+  .hero-sub{font-size:1rem;line-height:1.65}
+  .btn-primary{width:100%;max-width:420px;padding:16px 18px}
+  .hero-safe{font-size:.82rem;line-height:1.35;text-align:center;justify-content:center;flex-wrap:wrap}
+  .app-mockup-wrap{margin-top:38px}
+  .app-mockup-body{grid-template-columns:1fr}.app-sidebar{display:none}
+  .app-mockup-bar{align-items:flex-start}.app-mockup-prog{margin-left:auto}
+  .app-content{padding:20px 18px}.app-title{font-size:1.08rem}.app-text{font-size:.9rem}
+  .app-footer-btns{flex-direction:column;align-items:stretch;gap:10px}.nav-chips{display:grid;grid-template-columns:1fr 1fr}
+  .features-strip{margin-top:28px;justify-content:stretch}.feat-chip{width:100%;justify-content:flex-start}
+  .proof-bar{gap:12px;align-items:flex-start;justify-content:flex-start}.proof-item{width:100%;justify-content:flex-start}
+  .section-title{font-size:clamp(1.72rem,8vw,2.35rem);line-height:1.16}
+  .section-sub{font-size:1rem}.feat-grid,.cap-grid,.para-grid,.dep-grid{grid-template-columns:1fr}
+  .transformacao{grid-template-columns:1fr;gap:14px}.trans-arrow{display:none}
+  .garantia-card{flex-direction:column;padding:26px 22px}.garantia-badge{width:58px;height:58px}
+  .incluso-item{grid-template-columns:20px minmax(0,1fr);font-size:.92rem}
+  .incluso-item s{grid-column:2;margin-left:0;margin-top:2px;justify-self:start}
+  .oferta-box::before{font-size:.64rem;max-width:86%;overflow:hidden;text-overflow:ellipsis}
+}
+
+@media(max-width:390px){
+  .hero h1{font-size:2rem}.section-title{font-size:1.65rem}.price-main{font-size:3rem}
+  .nav-cta{padding:8px 10px;font-size:.78rem}.logo{font-size:1.05rem}
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <p>⚡ Lançamento — <strong>preço especial por tempo limitado</strong></p>
+</div>
+
+<nav>
+  <div class="logo">MENTE<span>.IA</span></div>
+  <button class="nav-cta" onclick="document.getElementById('oferta').scrollIntoView({behavior:'smooth'})">Acessar o app →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">App interativo · Novo · 2025</div>
+  <h1>Aprenda a usar o ChatGPT como um <em>profissional de elite</em> — direto no navegador</h1>
+  <p class="hero-sub">Não é um PDF para baixar e esquecer. É um app interativo com 10 capítulos navegáveis, 50 prompts copiáveis com um clique e plano de 30 dias para criar o hábito definitivamente.</p>
+  <div class="hero-cta-wrap">
+    <a href="#oferta" class="btn-primary">
+      Quero acessar o app agora
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <div class="hero-safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;color:#1D9E75"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Garantia de 7 dias · Acesso imediato · Funciona em qualquer dispositivo
+    </div>
+  </div>
+
+  <!-- App mockup -->
+  <div class="app-mockup-wrap">
+    <div class="app-mockup">
+      <div class="app-mockup-bar">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="app-mockup-logo">MENTE<span>.IA</span></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.35)">ChatGPT do Zero ao Profissional</div>
+        </div>
+        <div class="app-mockup-prog">
+          <div class="prog-track"><div class="prog-fill"></div></div>
+          <span class="prog-txt">3 / 10</span>
+        </div>
+      </div>
+      <div class="app-mockup-body">
+        <div class="app-sidebar">
+          <div class="app-nav-item"><span class="app-nav-num">—</span>Introdução</div>
+          <div class="app-nav-item"><span class="app-nav-num">01</span>O que é o ChatGPT</div>
+          <div class="app-nav-item"><span class="app-nav-num">02</span>Configurando o ambiente</div>
+          <div class="app-nav-item active"><span class="app-nav-num">03</span>A arte dos prompts</div>
+          <div class="app-nav-item"><span class="app-nav-num">04</span>ChatGPT no trabalho</div>
+          <div class="app-nav-item"><span class="app-nav-num">05</span>Para estudos</div>
+          <div class="app-nav-item"><span class="app-nav-num">··</span>+ 5 capítulos</div>
+        </div>
+        <div class="app-content">
+          <div class="app-eyebrow">Capítulo 3</div>
+          <div class="app-title">A arte dos prompts: o framework CRFE</div>
+          <div class="app-text">Todo prompt de alta performance tem quatro componentes. Quanto mais você incluir, melhor o resultado na primeira tentativa.</div>
+          <div class="prompt-preview">
+            <div class="prompt-header">
+              <span class="prompt-badge">Prompt 15</span>
+              <span class="copy-chip">Copiar ↗</span>
+            </div>
+            <div class="prompt-txt">Antes de me dar a solução, analise o problema passo a passo: 1) Identifique os elementos-chave, 2) Liste possíveis causas...</div>
+          </div>
+          <div class="app-footer-btns">
+            <div class="mark-chip">✓ Marcar como lido</div>
+            <div class="nav-chips">
+              <div class="nav-chip">← Anterior</div>
+              <div class="nav-chip">Próximo →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-strip">
+    <div class="feat-chip">
+      <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Prompts copiáveis com 1 clique
+    </div>
+    <div class="feat-chip">
+      <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Progresso de leitura salvo
+    </div>
+    <div class="feat-chip">
+      <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+      Navegação por capítulo
+    </div>
+    <div class="feat-chip">
+      <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      Celular, tablet ou computador
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" style="width:17px;height:17px"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span><strong>+1.800</strong> usuários ativos</span>
+  </div>
+  <div class="proof-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#EF9F27" stroke-width="2" style="width:17px;height:17px"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+    <span><strong>4,9/5</strong> avaliação</span>
+  </div>
+  <div class="proof-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" style="width:17px;height:17px"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span><strong>Acesso imediato</strong> após compra</span>
+  </div>
+  <div class="proof-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" style="width:17px;height:17px"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    <span>Garantia de <strong>7 dias</strong></span>
+  </div>
+</div>
+
+<!-- O QUE É O APP -->
+<section class="app-features">
+  <div class="section-eyebrow">Por que um app e não um PDF?</div>
+  <div class="section-title">PDF você baixa, esquece e nunca abre.<br>App você usa toda semana.</div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-card-icon">📋</div>
+      <h3>50 prompts copiáveis</h3>
+      <p>Cada prompt tem um botão "Copiar". Um clique e o texto vai direto para o clipboard — pronto para colar no ChatGPT sem digitar nada.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">🗂️</div>
+      <h3>Navegação por capítulo</h3>
+      <p>Sidebar com todos os 10 capítulos. Marque como lido, volte quando quiser, navegue direto para o capítulo que precisa no momento.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">📊</div>
+      <h3>Progresso de leitura</h3>
+      <p>Barra de progresso visual que atualiza conforme você avança. Veja exatamente onde parou e quanto falta para concluir.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">📱</div>
+      <h3>Qualquer dispositivo</h3>
+      <p>Abre no navegador do celular, tablet ou computador. Sem instalação, sem download, sem aplicativo. Só abrir e usar.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">📖</div>
+      <h3>Conteúdo estruturado</h3>
+      <p>Caixas de destaque coloridas por tipo (conceito, dica avançada, atenção, exercício), tabelas comparativas e listas organizadas por hierarquia.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">📄</div>
+      <h3>PDF incluso como bônus</h3>
+      <p>Prefere imprimir ou ler offline? O PDF completo do e-book está incluído na compra como material complementar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="conteudo">
+  <div class="section-eyebrow">O que tem dentro</div>
+  <div class="section-title">10 capítulos completos.<br>Do básico ao avançado.</div>
+  <div class="cap-grid">
+    <div class="cap-item"><div class="cap-num">CAP 1</div><div class="cap-info"><strong>O que é o ChatGPT de verdade</strong><p>Como funciona, versões, 5 mitos desmontados, por que agora</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 2</div><div class="cap-info"><strong>Configurando o ambiente ideal</strong><p>Conta, Custom Instructions, organização por projeto, app mobile</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 3</div><div class="cap-info"><strong>A arte dos prompts perfeitos</strong><p>Framework CRFE, Chain of Thought, Few-shot, 10 erros fatais</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 4</div><div class="cap-info"><strong>Produtividade no trabalho</strong><p>Documentos, reuniões, análises, apresentações, planejamento</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 5</div><div class="cap-info"><strong>Aprendizado acelerado</strong><p>Método Feynman, planos de estudo, simulados, idiomas</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 6</div><div class="cap-info"><strong>Comunicação profissional</strong><p>E-mails difíceis, relatórios, feedback SBI, crise</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 7</div><div class="cap-info"><strong>Criatividade e conteúdo</strong><p>Brainstorm, calendário de conteúdo, storytelling, roteiros</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 8</div><div class="cap-info"><strong>Técnicas avançadas</strong><p>Custom GPTs, Code Interpreter, metaprompts, integrações</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 9</div><div class="cap-info"><strong>Segurança e privacidade</strong><p>Proteção de dados, alucinações, ética, uso corporativo</p></div></div>
+    <div class="cap-item"><div class="cap-num">CAP 10</div><div class="cap-info"><strong>Plano de 30 dias</strong><p>Cada dia com tarefa específica, métricas e rotina permanente</p></div></div>
+  </div>
+</section>
+
+<!-- TRANSFORMAÇÃO -->
+<section class="transformacao-wrap">
+  <div style="padding:0 5%">
+    <div class="section-eyebrow">A diferença</div>
+    <div class="section-title" style="text-align:center">PDF que você esquece vs. app que você usa</div>
+    <div class="transformacao">
+      <div class="trans-box antes">
+        <div class="trans-label">E-book PDF</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>Baixa, salva, esquece</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>Prompts: copiar à mão</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>Sem saber onde parou</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>Navegação linear chata</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>Difícil de consultar depois</div>
+      </div>
+      <div class="trans-arrow">→</div>
+      <div class="trans-box depois">
+        <div class="trans-label">App MENTE.IA</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Abre direto no navegador</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Prompts copiáveis 1 clique</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Progresso salvo e visível</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Navegação livre por capítulo</div>
+        <div class="trans-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Consulta rápida de prompts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="para">
+  <div class="section-eyebrow">Este app é para você se...</div>
+  <div class="section-title">Você se encaixa em pelo menos<br>um desses perfis</div>
+  <div class="para-grid">
+    <div class="para-card"><div class="para-emoji">💼</div><strong>Profissional sobrecarregado</strong><p>Quer fazer em 2h o que hoje leva o dia inteiro, sem trabalhar mais.</p></div>
+    <div class="para-card"><div class="para-emoji">🎓</div><strong>Estudante ou recém-formado</strong><p>Quer se diferenciar com habilidades que o mercado já exige.</p></div>
+    <div class="para-card"><div class="para-emoji">🚀</div><strong>Empreendedor ou criador</strong><p>Quer produzir conteúdo e escalar sem precisar de equipe grande.</p></div>
+    <div class="para-card"><div class="para-emoji">👩‍🏫</div><strong>Professor ou educador</strong><p>Quer criar materiais e planos de aula 3× mais rápido.</p></div>
+    <div class="para-card"><div class="para-emoji">📱</div><strong>Criador de conteúdo</strong><p>Quer nunca mais ficar sem ideia e criar posts em minutos.</p></div>
+    <div class="para-card"><div class="para-emoji">🔄</div><strong>Em transição de carreira</strong><p>Quer adquirir as habilidades digitais que o novo mercado exige.</p></div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos">
+  <div class="section-eyebrow">Resultados reais</div>
+  <div class="section-title">O que os usuários estão dizendo</div>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"Fiz outros cursos de IA e nenhum chegou perto. O framework CRFE mudou completamente meu jeito de trabalhar. Economizo pelo menos 2 horas por dia."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#3C3489,#7F77DD)">RC</div><div class="dep-author-info"><strong>Rafael C.</strong><span>Gerente de Projetos · SP</span></div></div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"Adorei o formato de app. Os prompts copiáveis com um clique são ouro — paro de digitá-los do zero toda vez. Já usei 8 deles essa semana."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#0F6E56,#1D9E75)">AM</div><div class="dep-author-info"><strong>Ana M.</strong><span>Diretora de Marketing · RJ</span></div></div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"O app é muito mais prático do que eu esperava. Abro no celular entre uma reunião e outra, leio um capítulo, copio um prompt e já aplico. Funciona perfeitamente."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#854F0B,#EF9F27)">LS</div><div class="dep-author-info"><strong>Lucas S.</strong><span>Analista de Dados · MG</span></div></div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"Sou professora e estava com medo de ser substituída pela IA. O capítulo 5 me mostrou que a IA é minha aliada. Preparo aulas 3× mais rápido agora."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#993556,#D4537E)">CF</div><div class="dep-author-info"><strong>Carla F.</strong><span>Professora · RS</span></div></div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"Gostei muito do progresso de leitura visível. Me motivou a terminar todos os capítulos em uma semana. Não consigo parar de usar o app."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#185FA5,#378ADD)">MO</div><div class="dep-author-info"><strong>Marcos O.</strong><span>UX Designer · SP</span></div></div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <p class="dep-text">"Na segunda-feira já estava usando Custom Instructions e metaprompt. Meu chefe comentou que minha qualidade de entrega melhorou muito. Valeu cada centavo."</p>
+      <div class="dep-author"><div class="dep-avatar" style="background:linear-gradient(135deg,#3B6D11,#639922)">JA</div><div class="dep-author-info"><strong>Juliana A.</strong><span>Copywriter · BH</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="oferta" id="oferta">
+  <div class="section-eyebrow">Garanta seu acesso</div>
+  <div class="section-title">Tudo que você recebe hoje</div>
+  <div class="oferta-box">
+    <div class="incluso-list">
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        App interativo completo (10 capítulos) <span class="main-tag">PRINCIPAL</span>
+        <s>R$ 127</s>
+      </div>
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        50 prompts copiáveis integrados no app
+        <s>R$ 47</s>
+      </div>
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Bônus 1 — PDF completo do e-book para download
+        <s>R$ 47</s>
+      </div>
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Bônus 2 — Checklist do Profissional de IA
+        <s>R$ 17</s>
+      </div>
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Bônus 3 — As 12 melhores ferramentas de IA
+        <s>R$ 17</s>
+      </div>
+      <div class="incluso-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Atualizações do app por 12 meses
+        <s>Priceless</s>
+      </div>
+    </div>
+    <div class="price-wrap">
+      <div class="price-old">De R$ 255 por apenas</div>
+      <div class="price-main"><span>R$</span>67</div>
+      <div class="price-parcel">ou 2× de R$ 34,90 sem juros</div>
+    </div>
+    <a href="https://pay.kiwify.com.br/U7VcdBs" class="btn-oferta">Acessar o app agora — R$ 67</a>
+    <div class="garantia-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#1D9E75"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      Compra 100% segura · Garantia incondicional de 7 dias · Acesso imediato
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="garantia">
+  <div class="section-eyebrow">Sem risco</div>
+  <div class="section-title">Garantia incondicional de 7 dias</div>
+  <div class="garantia-card">
+    <div class="garantia-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2" style="width:32px;height:32px"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    </div>
+    <div>
+      <div class="garantia-title">Se não gostar, devolvemos 100% do valor</div>
+      <p class="garantia-text">Acesse o app, navegue pelos capítulos, use os prompts, teste o método. Se por qualquer motivo você não estiver satisfeito dentro de 7 dias, basta enviar um e-mail para contato@menteia.com.br e devolvemos todo o valor. Sem perguntas. Sem burocracia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-eyebrow" style="text-align:center">Dúvidas frequentes</div>
+  <div class="section-title" style="text-align:center;margin-bottom:36px">Tudo que você precisa saber</div>
+  <div style="max-width:660px;margin:0 auto">
+    <details><summary>Como acesso o app após a compra?</summary><div class="faq-body">Imediatamente. Assim que o pagamento for confirmado, você recebe um e-mail com o link de acesso ao app. Basta clicar, abrir no navegador e começar a ler — sem instalar nada, sem criar conta adicional.</div></details>
+    <details><summary>Funciona no celular?</summary><div class="faq-body">Sim, perfeitamente. O app foi desenvolvido para funcionar em qualquer dispositivo — celular, tablet ou computador. Basta ter um navegador (Chrome, Safari, Firefox) e acesso à internet.</div></details>
+    <details><summary>Preciso ter experiência com tecnologia?</summary><div class="faq-body">Não. O conteúdo foi escrito para quem nunca usou o ChatGPT e para quem já usa mas quer melhorar. Se você consegue enviar uma mensagem no WhatsApp, consegue usar tudo que está aqui.</div></details>
+    <details><summary>O conteúdo fica desatualizado com as mudanças da IA?</summary><div class="faq-body">Não fica. O app cobre os princípios fundamentais que não mudam com atualizações — e oferecemos atualizações do conteúdo e do app por 12 meses sem custo adicional.</div></details>
+    <details><summary>Qual é a diferença entre o app e o PDF?</summary><div class="faq-body">O app é o produto principal: navegação por capítulos, prompts copiáveis com um clique, progresso de leitura e acesso em qualquer dispositivo. O PDF é o bônus incluído na compra — útil para quem quer imprimir ou ler completamente offline.</div></details>
+    <details><summary>Preciso assinar o ChatGPT Plus para aplicar o conteúdo?</summary><div class="faq-body">Não. A versão gratuita do ChatGPT é suficiente para aplicar a maior parte do conteúdo, incluindo o framework CRFE, os 50 prompts e o plano de 30 dias. O app indica claramente quais funcionalidades avançadas requerem o Plus.</div></details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="eyebrow" style="display:inline-block;background:rgba(127,119,221,0.15);border:1px solid rgba(127,119,221,0.35);color:var(--roxo);font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px">Última chamada</div>
+  <h2>PDF você esquece.<br>App você usa todo dia.</h2>
+  <p>Acesso imediato. Garantia de 7 dias. Preço de lançamento por tempo limitado.</p>
+  <a href="#oferta" class="btn-primary" style="display:inline-flex;margin:0 auto">
+    Acessar o app por R$ 67
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<footer>
+  <p>© 2025 MENTE.IA · menteia.com.br · contato@menteia.com.br</p>
+  <p style="margin-top:6px">Produto digital distribuído via Kiwify · Garantia de 7 dias · Acesso imediato após confirmação do pagamento</p>
+</footer>
+
+</body>
+</html>
